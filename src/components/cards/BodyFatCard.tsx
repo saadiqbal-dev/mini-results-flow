@@ -2,7 +2,7 @@ import React from "react";
 import type { CardProps } from "../../types";
 import { Header } from "../ui/Header";
 import { Button } from "../ui/button";
-import { Scale, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const BodyFatCard: React.FC<CardProps> = ({
   formData,
@@ -30,58 +30,62 @@ export const BodyFatCard: React.FC<CardProps> = ({
     <div className="min-h-screen bg-[#F8F4F4] p-4">
       <div className="max-w-md mx-auto">
         <Header currentCard={currentCard} totalCards={totalCards} />
-        <div className="bg-white rounded-3xl p-6 shadow-sm">
-          <div className="text-center mb-6">
-            <div className="flex justify-center mb-4">
-              <Scale className="w-12 h-12 text-[#36BC9F]" />
-            </div>
-            <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
-              Your Body Fat Percentage Is{" "}
-              <span className="text-[#F75950]">{formData.bodyFatPercent}%</span>
-            </h1>
-            <h2 className="text-[#183B49] font-inter font-semibold text-xl">
-              Here's Why That Matters
-            </h2>
-          </div>
 
-          <div className="mb-6 flex justify-center">
-            <div className="flex items-center gap-4">
-              <div className="bg-[#36BC9F] rounded-lg p-3 text-white text-sm">
-                Muscle Mass
-              </div>
-              <div className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center text-white text-2xl">
-                👤
-              </div>
-              <div className="bg-orange-400 rounded-lg p-3 text-white text-sm">
-                Body Fat
-              </div>
-            </div>
-          </div>
+        {/* Stacked cards effect */}
+        <div className="relative">
+          {/* Bottom card (furthest back) */}
+          <div className="absolute top-3 left-0 right-0 h-full bg-white rounded-3xl shadow-lg transform"></div>
 
-          <div className="space-y-4 text-[#13556F] font-inter text-base leading-relaxed">
-            <p>
-              Your body fat percentage tells us how much of your body is lean
-              mass (muscle, organs, bone) vs stored fat.
-            </p>
-            <p>
-              Too much stored fat doesn't just affect how you look — it impacts
-              your energy, hormone balance, and ability to burn fat efficiently.
-            </p>
-            <div className="bg-[#FFF5F4] p-4 rounded-lg border-l-4 border-[#F75950]">
+          {/* Middle card */}
+          <div className="absolute top-1.5 left-0 right-0 h-full bg-white rounded-3xl shadow-lg transform"></div>
+
+          {/* Front card (main content) */}
+          <div className="relative bg-white rounded-3xl p-6 shadow-lg transform transition-transform ">
+            <div className="text-center mb-6">
+              <div className="flex justify-center mb-4 text-[34px]">⚖</div>
+              <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
+                Your Body Fat Percentage Is{" "}
+                <span className="text-[#F75950]">
+                  {formData.bodyFatPercent}%
+                </span>
+              </h1>
+              <h2 className="text-[#183B49] font-inter font-semibold text-xl">
+                Here's Why That Matters
+              </h2>
+            </div>
+
+            <div className="mb-6 flex justify-center">
+              <img
+                src="/images/cards/card1.png"
+                alt="Body Fat Illustration"
+                className="mx-auto w-80"
+              />
+            </div>
+
+            <div className="space-y-4 text-[#13556F] font-inter text-base leading-relaxed">
+              <p>
+                Your body fat percentage tells us how much of your body is lean
+                mass (muscle, organs, bone) vs stored fat.
+                <br /> Too much stored fat doesn't just affect how you look — it
+                impacts your energy, hormone balance, and ability to burn fat
+                efficiently.
+              </p>
               <p className="text-[#F75950] font-inter text-base">
                 {getConditionalText()}
               </p>
             </div>
           </div>
-        </div>{" "}
-        <Button
-          onClick={onNext}
-          className="w-full bg-[#36BC9F] text-white py-4 rounded-xl font-inter font-semibold text-lg mt-6 hover:bg-[#2A9A82] transition-colors"
-          size="lg"
-        >
-          Next
-          <ArrowRight className="w-5 h-5 ml-2" />
-        </Button>
+        </div>
+        <div className="grid grid-cols-2 gap-3 mt-16">
+          <Button className="invisible" variant="outline">
+            Back
+            <ArrowLeft strokeWidth={3} className="size-6 absolute left-2" />
+          </Button>
+          <Button onClick={onNext}>
+            Next
+            <ArrowRight strokeWidth={3} className="size-6 absolute right-2" />
+          </Button>
+        </div>
       </div>
     </div>
   );

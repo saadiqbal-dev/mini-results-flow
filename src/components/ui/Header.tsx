@@ -6,17 +6,17 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentCard, totalCards }) => (
-  <div className="flex flex-col items-center mb-8">
-    <div className="flex justify-center mb-6">
+  <div className="flex flex-col items-center mb-5">
+    <div className="flex justify-center mb-5">
       <img
         src="/images/ketoslim-logo.png"
         alt="KETOSLIM"
-        className="h-8 w-auto"
+        className="h-4 w-auto"
       />
     </div>
     {currentCard && totalCards && (
-      <div className="flex items-center gap-4">
-        <div className="text-[#36BC9F] font-inter font-normal text-lg">
+      <div className="flex items-center justify-between w-full gap-4">
+        <div className="text-[#36BC9F] font-inter font-semibold text-base">
           Your Results
         </div>
         <div className="flex gap-2">
