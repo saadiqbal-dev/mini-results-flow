@@ -117,7 +117,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                 {errors.gender && (
                   <p className="text-red-500 text-sm mt-1">{errors.gender}</p>
                 )}
-              </div>              {/* Body Fat % */}
+              </div>{" "}
+              {/* Body Fat % */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   Body Fat % ({formData.bodyFatPercent}%)
@@ -137,7 +138,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                     className="w-full [&_[data-slot=slider-track]]:bg-gray-200 [&_[data-slot=slider-range]]:bg-[#36BC9F] [&_[data-slot=slider-thumb]]:bg-white [&_[data-slot=slider-thumb]]:border-[#36BC9F] [&_[data-slot=slider-thumb]]:size-5 [&_[data-slot=slider-thumb]]:border-2"
                   />
                 </div>
-              </div>              {/* BMI */}
+              </div>{" "}
+              {/* BMI */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   BMI ({formData.BMI})
@@ -154,7 +156,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                     className="w-full [&_[data-slot=slider-track]]:bg-gray-200 [&_[data-slot=slider-range]]:bg-[#36BC9F] [&_[data-slot=slider-thumb]]:bg-white [&_[data-slot=slider-thumb]]:border-[#36BC9F] [&_[data-slot=slider-thumb]]:size-5 [&_[data-slot=slider-thumb]]:border-2"
                   />
                 </div>
-              </div>              {/* Daily Calorie Target */}
+              </div>{" "}
+              {/* Daily Calorie Target */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   Daily Calorie Target
@@ -176,7 +179,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                     {errors.calorieTarget}
                   </p>
                 )}
-              </div>              {/* Water Intake */}
+              </div>{" "}
+              {/* Water Intake */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   Cups of Water Per Day
@@ -200,7 +204,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                     <SelectItem value="6">6 cups</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>              {/* Weekly Weight Loss Goal */}
+              </div>{" "}
+              {/* Weekly Weight Loss Goal */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   Weekly Weight Loss Goal (lbs)
@@ -223,7 +228,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                     {errors.weightLossRate}
                   </p>
                 )}
-              </div>{" "}              {/* Days to See Results */}
+              </div>{" "}
+              {/* Days to See Results */}
               <div className="mb-4">
                 <label className="block text-[#183B49] font-inter font-semibold mb-3">
                   Days to See Results
