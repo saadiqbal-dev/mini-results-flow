@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import type { FormData } from "../types";
+import { Button } from "./ui/button";
+import { Clock, ArrowRight, Shield } from "lucide-react";
 
 interface SalespageCardProps {
   formData: FormData;
@@ -47,28 +49,33 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
 
   return (
     <div className="min-h-screen bg-[#F8F4F4] relative">
-      {/* Sticky CTA Button */}
+      {/* Sticky CTA Button */}{" "}
       {showStickyButton && (
         <div className="fixed bottom-4 left-4 right-4 z-50">
-          <button
+          <Button
             onClick={scrollToPlanPicker}
             className="w-full bg-[#F75950] text-white py-4 rounded-xl font-inter font-semibold text-lg shadow-lg hover:bg-[#E54940] transition-colors"
+            size="lg"
           >
             Claim My Plan
-          </button>
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       )}
-
       <div className="max-w-md mx-auto p-4 pb-20">
+        {" "}
         <div className="text-center mb-8">
-          <div className="text-[#36BC9F] font-inter font-semibold text-lg mb-4">
-            KETOSLIM
+          <div className="flex justify-center mb-4">
+            <img
+              src="/images/ketoslim-logo.png"
+              alt="KETOSLIM"
+              className="h-8 w-auto"
+            />
           </div>
           <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-4">
             🎯 Your Personalized KetoSlim Plan Is Ready
           </h1>
         </div>
-
         {/* Before/After Comparison */}
         <div className="bg-white rounded-3xl p-6 shadow-sm mb-6">
           <div className="flex justify-between items-center mb-4">
@@ -97,7 +104,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             </div>
           </div>
         </div>
-
         {/* Benefits List */}
         <div className="bg-white rounded-3xl p-6 shadow-sm mb-6">
           <h3 className="text-[#183B49] font-inter font-semibold text-xl mb-4">
@@ -119,16 +125,17 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             ))}
           </div>
         </div>
-
-        {/* Countdown Timer */}
+        {/* Countdown Timer */}{" "}
         <div className="bg-[#F75950] text-white rounded-3xl p-6 text-center mb-6">
+          <div className="flex justify-center mb-2">
+            <Clock className="w-8 h-8" />
+          </div>
           <h3 className="font-inter font-semibold text-xl mb-2">
             Special Launch Offer
           </h3>
           <div className="text-4xl font-bold mb-2">{formatTime(timeLeft)}</div>
           <p className="text-sm">This offer expires soon!</p>
         </div>
-
         {/* Plan Picker */}
         <div ref={planPickerRef} className="space-y-4">
           <h3 className="text-[#183B49] font-inter font-semibold text-xl text-center mb-4">
@@ -148,10 +155,14 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               <div className="text-gray-500 line-through mb-2">$67</div>
               <div className="text-sm text-[#13556F] mb-4">
                 One-time payment
-              </div>
-              <button className="w-full bg-[#36BC9F] text-white py-3 rounded-xl font-inter font-semibold hover:bg-[#2A9A82] transition-colors">
-                Continue →
-              </button>
+              </div>{" "}
+              <Button
+                className="w-full bg-[#36BC9F] text-white py-3 rounded-xl font-inter font-semibold hover:bg-[#2A9A82] transition-colors"
+                size="lg"
+              >
+                Continue
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
             </div>
           </div>
 
@@ -165,17 +176,22 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               <div className="text-gray-500 line-through mb-2">$127</div>
               <div className="text-sm text-[#13556F] mb-4">
                 One-time payment
-              </div>
-              <button className="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-inter font-semibold hover:bg-gray-300 transition-colors">
+              </div>{" "}
+              <Button
+                variant="outline"
+                className="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-inter font-semibold hover:bg-gray-300 transition-colors"
+                size="lg"
+              >
                 Select Plan
-              </button>
+              </Button>
             </div>
           </div>
         </div>
-
-        {/* Money Back Guarantee */}
+        {/* Money Back Guarantee */}{" "}
         <div className="bg-white rounded-3xl p-6 shadow-sm mt-6 text-center">
-          <div className="text-4xl mb-2">🛡️</div>
+          <div className="flex justify-center mb-4">
+            <Shield className="w-12 h-12 text-[#36BC9F]" />
+          </div>
           <h3 className="text-[#183B49] font-inter font-semibold text-lg mb-2">
             Money Back Guarantee
           </h3>

@@ -1,7 +1,8 @@
 import React from "react";
 import type { CardProps } from "../../types";
 import { Header } from "../ui/Header";
-import { ProgressIndicator } from "../ui/ProgressIndicator";
+import { Button } from "../ui/button";
+import { Clock, ArrowRight, ChevronLeft } from "lucide-react";
 
 export const ResultsTimelineCard: React.FC<CardProps> = ({
   formData,
@@ -13,12 +14,12 @@ export const ResultsTimelineCard: React.FC<CardProps> = ({
   return (
     <div className="min-h-screen bg-[#F8F4F4] p-4">
       <div className="max-w-md mx-auto">
-        <Header />
-        <ProgressIndicator current={currentCard} total={totalCards} />
-
+        <Header currentCard={currentCard} totalCards={totalCards} />
         <div className="bg-white rounded-3xl p-6 shadow-sm">
           <div className="text-center mb-6">
-            <div className="text-4xl mb-4">⏳</div>
+            <div className="flex justify-center mb-4">
+              <Clock className="w-12 h-12 text-[#36BC9F]" />
+            </div>
             <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
               You Could See Results in as Little as{" "}
               <span className="text-[#F75950]">
@@ -65,21 +66,25 @@ export const ResultsTimelineCard: React.FC<CardProps> = ({
               </p>
             </div>
           </div>
-        </div>
-
+        </div>{" "}
         <div className="flex gap-3 mt-6">
-          <button
+          <Button
             onClick={onBack}
-            className="flex-1 bg-transparent border-2 border-[#36BC9F] text-[#36BC9F] py-4 rounded-xl font-inter font-semibold text-lg hover:bg-[#36BC9F] hover:text-white transition-colors"
+            variant="outline"
+            className="flex-1 border-2 border-[#36BC9F] text-[#36BC9F] py-4 rounded-xl font-inter font-semibold text-lg hover:bg-[#36BC9F] hover:text-white transition-colors"
+            size="lg"
           >
-            ← Weight Rate
-          </button>
-          <button
+            <ChevronLeft className="w-5 h-5 mr-2" />
+            Weight Rate
+          </Button>
+          <Button
             onClick={onNext}
             className="flex-1 bg-[#36BC9F] text-white py-4 rounded-xl font-inter font-semibold text-lg hover:bg-[#2A9A82] transition-colors"
+            size="lg"
           >
-            Next →
-          </button>
+            Next
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
         </div>
       </div>
     </div>

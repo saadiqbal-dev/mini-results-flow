@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 import type { FormData } from "../types";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { Slider } from "./ui/slider";
 
 interface InputFormProps {
   onSubmit: (data: FormData) => void;
@@ -48,94 +58,96 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
   return (
     <div className="min-h-screen bg-[#F8F4F4] p-4">
       <div className="max-w-md mx-auto">
+        {" "}
         <div className="text-center mb-8">
-          <div className="text-[#36BC9F] font-inter font-semibold text-2xl mb-4">
-            KETOSLIM
+          <div className="flex justify-center mb-4">
+            <img
+              src="/images/ketoslim-logo.png"
+              alt="KETOSLIM"
+              className="h-12 w-auto"
+            />
           </div>
           <h1 className="text-[#183B49] font-inter font-semibold text-3xl leading-tight mb-4">
             Let's Create Your Personalized Plan
           </h1>
         </div>
-
         <div className="space-y-6">
           {/* Gender */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Gender
-            </label>
+            </label>{" "}
             <div className="flex gap-3">
-              <button
+              <Button
                 type="button"
                 onClick={() => setFormData({ ...formData, gender: "male" })}
-                className={`flex-1 py-3 px-4 rounded-lg font-inter font-medium transition-colors ${
+                variant={formData.gender === "male" ? "default" : "outline"}
+                className={`flex-1 py-3 ${
                   formData.gender === "male"
-                    ? "bg-[#36BC9F] text-white"
+                    ? "bg-[#36BC9F] hover:bg-[#2A9A82] text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 Male
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 onClick={() => setFormData({ ...formData, gender: "female" })}
-                className={`flex-1 py-3 px-4 rounded-lg font-inter font-medium transition-colors ${
+                variant={formData.gender === "female" ? "default" : "outline"}
+                className={`flex-1 py-3 ${
                   formData.gender === "female"
-                    ? "bg-[#36BC9F] text-white"
+                    ? "bg-[#36BC9F] hover:bg-[#2A9A82] text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
                 Female
-              </button>
+              </Button>
             </div>
             {errors.gender && (
               <p className="text-red-500 text-sm mt-1">{errors.gender}</p>
             )}
           </div>
-
           {/* Body Fat % */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Body Fat % ({formData.bodyFatPercent}%)
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={formData.bodyFatPercent}
-              onChange={(e) =>
+            </label>{" "}
+            <Slider
+              value={[formData.bodyFatPercent]}
+              onValueChange={(value) =>
                 setFormData({
                   ...formData,
-                  bodyFatPercent: parseInt(e.target.value),
+                  bodyFatPercent: value[0],
                 })
               }
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+              min={0}
+              max={100}
+              step={1}
+              className="w-full"
             />
           </div>
-
           {/* BMI */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               BMI ({formData.BMI})
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="40"
-              step="0.1"
-              value={formData.BMI}
-              onChange={(e) =>
-                setFormData({ ...formData, BMI: parseFloat(e.target.value) })
+            </label>{" "}
+            <Slider
+              value={[formData.BMI]}
+              onValueChange={(value) =>
+                setFormData({ ...formData, BMI: value[0] })
               }
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+              min={0}
+              max={40}
+              step={0.1}
+              className="w-full"
             />
           </div>
-
           {/* Daily Calorie Target */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Daily Calorie Target
-            </label>
-            <input
+            </label>{" "}
+            <Input
               type="number"
               value={formData.calorieTarget}
               onChange={(e) =>
@@ -144,7 +156,7 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                   calorieTarget: parseInt(e.target.value) || 0,
                 })
               }
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-[#36BC9F] focus:border-transparent"
+              className="w-full py-3 px-4"
               placeholder="Enter calories"
             />
             {errors.calorieTarget && (
@@ -153,35 +165,37 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
               </p>
             )}
           </div>
-
           {/* Water Intake */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Cups of Water Per Day
-            </label>
-            <select
-              value={formData.waterIntake}
-              onChange={(e) =>
+            </label>{" "}
+            <Select
+              value={formData.waterIntake.toString()}
+              onValueChange={(value) =>
                 setFormData({
                   ...formData,
-                  waterIntake: parseInt(e.target.value),
+                  waterIntake: parseInt(value),
                 })
               }
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-[#36BC9F] focus:border-transparent"
             >
-              <option value={1}>1 cup</option>
-              <option value={2}>2 cups</option>
-              <option value={4}>4 cups</option>
-              <option value={6}>6 cups</option>
-            </select>
+              <SelectTrigger className="w-full py-3 px-4">
+                <SelectValue placeholder="Select cups of water" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">1 cup</SelectItem>
+                <SelectItem value="2">2 cups</SelectItem>
+                <SelectItem value="4">4 cups</SelectItem>
+                <SelectItem value="6">6 cups</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-
           {/* Weekly Weight Loss Goal */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Weekly Weight Loss Goal (lbs)
-            </label>
-            <input
+            </label>{" "}
+            <Input
               type="number"
               step="0.1"
               value={formData.weightLossRate}
@@ -191,7 +205,7 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                   weightLossRate: parseFloat(e.target.value) || 0,
                 })
               }
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-[#36BC9F] focus:border-transparent"
+              className="w-full py-3 px-4"
               placeholder="Enter lbs per week"
             />
             {errors.weightLossRate && (
@@ -200,13 +214,12 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
               </p>
             )}
           </div>
-
           {/* Days to See Results */}
           <div className="bg-white rounded-xl p-4">
             <label className="block text-[#183B49] font-inter font-semibold mb-3">
               Days to See Results
-            </label>
-            <input
+            </label>{" "}
+            <Input
               type="number"
               value={formData.seeResultsDays}
               onChange={(e) =>
@@ -215,7 +228,7 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                   seeResultsDays: parseInt(e.target.value) || 0,
                 })
               }
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg font-inter focus:outline-none focus:ring-2 focus:ring-[#36BC9F] focus:border-transparent"
+              className="w-full py-3 px-4"
               placeholder="Enter number of days"
             />
             {errors.seeResultsDays && (
@@ -223,9 +236,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                 {errors.seeResultsDays}
               </p>
             )}
-          </div>
-
-          <button
+          </div>{" "}
+          <Button
             onClick={handleSubmit}
             disabled={!isFormValid}
             className={`w-full py-4 rounded-xl font-inter font-semibold text-lg transition-colors ${
@@ -233,9 +245,10 @@ export const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
                 ? "bg-[#36BC9F] text-white hover:bg-[#2A9A82]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
+            size="lg"
           >
             Get My Personalized Results
-          </button>
+          </Button>
         </div>
       </div>
     </div>

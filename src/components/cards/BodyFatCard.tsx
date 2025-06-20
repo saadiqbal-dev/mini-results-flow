@@ -1,7 +1,8 @@
 import React from "react";
 import type { CardProps } from "../../types";
 import { Header } from "../ui/Header";
-import { ProgressIndicator } from "../ui/ProgressIndicator";
+import { Button } from "../ui/button";
+import { Scale, ArrowRight } from "lucide-react";
 
 export const BodyFatCard: React.FC<CardProps> = ({
   formData,
@@ -28,12 +29,12 @@ export const BodyFatCard: React.FC<CardProps> = ({
   return (
     <div className="min-h-screen bg-[#F8F4F4] p-4">
       <div className="max-w-md mx-auto">
-        <Header />
-        <ProgressIndicator current={currentCard} total={totalCards} />
-
+        <Header currentCard={currentCard} totalCards={totalCards} />
         <div className="bg-white rounded-3xl p-6 shadow-sm">
           <div className="text-center mb-6">
-            <div className="text-4xl mb-4">⚖️</div>
+            <div className="flex justify-center mb-4">
+              <Scale className="w-12 h-12 text-[#36BC9F]" />
+            </div>
             <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
               Your Body Fat Percentage Is{" "}
               <span className="text-[#F75950]">{formData.bodyFatPercent}%</span>
@@ -72,14 +73,15 @@ export const BodyFatCard: React.FC<CardProps> = ({
               </p>
             </div>
           </div>
-        </div>
-
-        <button
+        </div>{" "}
+        <Button
           onClick={onNext}
-          className="w-full bg-[#36BC9F] text-white py-4 rounded-xl font-inter font-semibold text-lg mt-6 flex items-center justify-center gap-2 hover:bg-[#2A9A82] transition-colors"
+          className="w-full bg-[#36BC9F] text-white py-4 rounded-xl font-inter font-semibold text-lg mt-6 hover:bg-[#2A9A82] transition-colors"
+          size="lg"
         >
-          Next →
-        </button>
+          Next
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </Button>
       </div>
     </div>
   );
