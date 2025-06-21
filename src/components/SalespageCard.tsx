@@ -268,7 +268,7 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               3 Month Custom Keto Plan
             </p>
             <div className="rounded-lg bg-[#f35654] px-4 py-1.5 shadow text-white flex items-center justify-between">
-              <p>Discount exires in:</p>
+              <p>Discount expires in:</p>
               <p className="flex items-center gap-2 font-bold">
                 {formatTime(timeLeft)} <Clock />
               </p>
