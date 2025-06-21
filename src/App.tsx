@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FormData } from "./types";
 import { InputForm } from "./components/InputForm";
 import { SalespageCard } from "./components/SalespageCard";
@@ -17,6 +17,11 @@ export default function App() {
   >("form");
   const [currentCard, setCurrentCard] = useState(1);
   const [formData, setFormData] = useState<FormData | null>(null);
+
+  // Scroll to top when step or card changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep, currentCard]);
 
   const handleFormSubmit = (data: FormData) => {
     setFormData(data);
