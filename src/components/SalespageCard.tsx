@@ -58,7 +58,8 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
           <Button
             onClick={scrollToPlanPicker}
-            className="w-[calc(100vw-56px)] shadow-md"
+            className="w-[calc(min(100vw-56px,400px))] shadow-md"
+            style={{ maxWidth: "400px" }}
           >
             Claim My Plan
             <ArrowRight
