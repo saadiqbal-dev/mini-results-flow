@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ currentCard, totalCards }) => (
       />
     </div>
     {currentCard && totalCards && (
-      <div className="flex items-center justify-between w-full gap-4">
+      <div className="flex items-center justify-between w-full gap-4 px-4">
         <div className="text-[#36BC9F] font-inter font-semibold text-base">
           Your Results
         </div>
