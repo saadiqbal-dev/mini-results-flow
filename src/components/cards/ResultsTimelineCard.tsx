@@ -64,7 +64,7 @@ export const ResultsTimelineCard: React.FC<CardProps> = ({
         </div>
         <div className="grid grid-cols-2 gap-3 mt-16">
           <Button onClick={onBack} variant="outline">
-            Back
+            Weight Rate
             <ArrowLeft strokeWidth={3} className="size-6 absolute left-2" />
           </Button>
           <Button onClick={onNext}>

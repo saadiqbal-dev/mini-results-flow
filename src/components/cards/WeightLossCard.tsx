@@ -28,14 +28,14 @@ export const WeightLossCard: React.FC<CardProps> = ({
           <div className="relative bg-white rounded-3xl p-6 shadow-lg transform transition-transform ">
             <div className="text-center mb-6">
               <div className="flex justify-center mb-4 text-[34px]">📉</div>
-              <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
+              <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2 px-8">
                 You Could Be Losing{" "}
                 <span className="text-[#F75950]">
                   {formData.weightLossRate} lbs / Week
                 </span>
               </h1>
               <h2 className="text-[#183B49] font-inter font-semibold text-xl">
-                — With the Right Fuel Source
+                With the Right Fuel Source
               </h2>
             </div>
 
@@ -68,7 +68,7 @@ export const WeightLossCard: React.FC<CardProps> = ({
         </div>
         <div className="grid grid-cols-2 gap-3 mt-16">
           <Button onClick={onBack} variant="outline">
-            Back
+            Hydration
             <ArrowLeft strokeWidth={3} className="size-6 absolute left-2" />
           </Button>
           <Button onClick={onNext}>
