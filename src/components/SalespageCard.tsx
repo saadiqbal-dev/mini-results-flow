@@ -88,7 +88,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               Your Personalized KetoSlim Plan Is Ready
             </h1>
           </div>
-
           <div className="mb-6 flex justify-center relative">
             <img
               src="/images/cards/card7.png"
@@ -100,7 +99,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               <p className="text-lg font-semibold text-[#1b3b48]">6 Months</p>
             </div>
           </div>
-
           <div className="grid grid-cols-2 relative gap-12 mt-20">
             <div className="absolute h-full w-[1px] left-1/2 -bottom-7 -translate-x-1/2 bg-[#d8d8d8]" />
             <div className="flex flex-col">
@@ -166,7 +164,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               </div>
             </div>
           </div>
-
           <h3 className="text-[#1b3b48] font-semibold text-xl mb-4 mt-14">
             Your program will also work on:
           </h3>
@@ -187,7 +184,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               </div>
             ))}
           </div>
-
           <h3 className="text-[#1b3b48] font-semibold text-xl mb-4 mt-14">
             Get all the right tools & knowledge.
           </h3>
@@ -233,7 +229,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               />
             </div>
           </div>
-
           <h2 className="text-[#1b3b48] font-bold text-3xl leading-tight mb-4 mt-14">
             Trusted by health & nutrition professionals
           </h2>
@@ -261,9 +256,8 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             <a className="text-[#f35654] tracking-tight text-xs underline underline-offset-4">
               source
             </a>
-          </div>
-
-          <div className="flex flex-col gap-4 mt-8">
+          </div>{" "}
+          <div ref={planPickerRef} className="flex flex-col gap-4 mt-8">
             <p className="text-center text-[#1b3b48]">
               3 Month Custom Keto Plan
             </p>
@@ -361,7 +355,7 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
           <br />
           We guarantee you&apos;ll see visible results or you&apos;ll receive a
           full refund within 60 days after your purchase.
-          <div className="h-0.5 w-8 bg-[#1b3b48] my-10" />
+          <span className="h-0.5 w-8 bg-[#1b3b48] my-10 block" />
           By continuing, you represent that you are over 18 years of age and
           agree if for whatever reason you&apos;re unhappy with your plan to
           contact customer support for a refund.
