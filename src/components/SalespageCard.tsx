@@ -14,14 +14,94 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
   const [selectedPlan, setSelectedPlan] = useState<"installments" | "discount">(
     "discount"
   );
-  const planPickerRef = useRef<HTMLDivElement>(null);
 
+  // Animated progress values
+  const [energyLevelsNow, setEnergyLevelsNow] = useState(0);
+  const [physicalHealthNow, setPhysicalHealthNow] = useState(0);
+  const [metabolismSpeedNow, setMetabolismSpeedNow] = useState(0);
+  const [energyLevelsFuture, setEnergyLevelsFuture] = useState(0);
+  const [physicalHealthFuture, setPhysicalHealthFuture] = useState(0);
+  const [metabolismSpeedFuture, setMetabolismSpeedFuture] = useState(0);
+
+  const planPickerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => Math.max(0, prev - 1));
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // Animate progress values gradually
+    const targetValues = {
+      energyLevelsNow: 43,
+      physicalHealthNow: 20,
+      metabolismSpeedNow: 37,
+      energyLevelsFuture: 76,
+      physicalHealthFuture: 100,
+      metabolismSpeedFuture: 100,
+    };
+
+    const animateValue = (
+      setter: (value: number) => void,
+      target: number,
+      delay: number,
+      duration: number
+    ) => {
+      setTimeout(() => {
+        let startTime: number;
+        const animate = (currentTime: number) => {
+          if (!startTime) startTime = currentTime;
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Easing function for smooth animation
+          const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+          const currentValue = Math.round(target * easeOutCubic);
+
+          setter(currentValue);
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        };
+        requestAnimationFrame(animate);
+      }, delay);
+    };
+
+    // Start animations with different delays
+    animateValue(setEnergyLevelsNow, targetValues.energyLevelsNow, 500, 1500);
+    animateValue(
+      setPhysicalHealthNow,
+      targetValues.physicalHealthNow,
+      800,
+      1000
+    );
+    animateValue(
+      setMetabolismSpeedNow,
+      targetValues.metabolismSpeedNow,
+      1100,
+      1250
+    );
+    animateValue(
+      setEnergyLevelsFuture,
+      targetValues.energyLevelsFuture,
+      750,
+      2500
+    );
+    animateValue(
+      setPhysicalHealthFuture,
+      targetValues.physicalHealthFuture,
+      950,
+      3000
+    );
+    animateValue(
+      setMetabolismSpeedFuture,
+      targetValues.metabolismSpeedFuture,
+      1200,
+      3500
+    );
   }, []);
 
   useEffect(() => {
@@ -103,30 +183,29 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             <div className="absolute h-full w-[1px] left-1/2 -bottom-7 -translate-x-1/2 bg-[#d8d8d8]" />
             <div className="flex flex-col">
               <p className="font-semibold text-[#1b3b48]">Body Fat</p>
-              <span className="text-[#F75950]">{formData.bodyFatPercent}%</span>
-
+              <span className="text-[#F75950]">
+                {formData.bodyFatPercent}%
+              </span>{" "}
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Energy Levels</p>
                 <Progress
-                  value={43}
+                  value={energyLevelsNow}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
               </div>
-
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Physical Health</p>
                 <Progress
-                  value={20}
+                  value={physicalHealthNow}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
               </div>
-
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Metabolism Speed</p>
                 <Progress
-                  value={37}
+                  value={metabolismSpeedNow}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
@@ -134,30 +213,27 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             </div>
             <div className="flex flex-col">
               <p className="font-semibold text-[#1b3b48] p-0 m-0">Body Fat</p>
-              <span className="text-[#F75950]">10-12%</span>
-
+              <span className="text-[#F75950]">10-12%</span>{" "}
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Energy Levels</p>
                 <Progress
-                  value={76}
+                  value={energyLevelsFuture}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
               </div>
-
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Physical Health</p>
                 <Progress
-                  value={100}
+                  value={physicalHealthFuture}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
               </div>
-
               <div className="flex flex-col gap-3 mt-5">
                 <p className="font-semibold text-[#1b3b48]">Metabolism Speed</p>
                 <Progress
-                  value={100}
+                  value={metabolismSpeedFuture}
                   className="h-1.5 bg-[#d8d8d8]"
                   style={{ width: "100%" }}
                 />
