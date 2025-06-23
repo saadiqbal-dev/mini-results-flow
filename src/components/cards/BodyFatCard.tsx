@@ -1,15 +1,11 @@
 import React from "react";
-import type { CardProps } from "../../types";
-import { Header } from "../ui/Header";
-import { Button } from "../ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { FormData } from "../../types";
 
-export const BodyFatCard: React.FC<CardProps> = ({
-  formData,
-  onNext,
-  currentCard,
-  totalCards,
-}) => {
+interface BodyFatCardProps {
+  formData: FormData;
+}
+
+export const BodyFatCard: React.FC<BodyFatCardProps> = ({ formData }) => {
   const getConditionalText = () => {
     const { gender, bodyFatPercent } = formData;
     const maleThresholds = { almost: 24, obese: 25, veryObese: 32 };
@@ -27,66 +23,38 @@ export const BodyFatCard: React.FC<CardProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F4F4] p-4">
-      <div className="max-w-md mx-auto">
-        <Header currentCard={currentCard} totalCards={totalCards} />
-
-        {/* Stacked cards effect */}
-        <div className="relative">
-          {/* Bottom card (furthest back) */}
-          <div className="absolute top-3 left-0 right-0 h-full bg-white rounded-3xl shadow-lg transform"></div>
-
-          {/* Middle card */}
-          <div className="absolute top-1.5 left-0 right-0 h-full bg-white rounded-3xl shadow-lg transform"></div>
-
-          {/* Front card (main content) */}
-          <div className="relative bg-white rounded-3xl p-6 shadow-lg transform transition-transform ">
-            <div className="text-center mb-6">
-              <div className="flex justify-center mb-4 text-[34px]">⚖</div>
-              <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
-                Your Body Fat Percentage Is{" "}
-                <span className="text-[#F75950]">
-                  {formData.bodyFatPercent}%
-                </span>
-              </h1>
-              <h2 className="text-[#183B49] font-inter font-semibold text-xl">
-                Here's Why That Matters
-              </h2>
-            </div>
-
-            <div className="mb-6 flex justify-center">
-              <img
-                src="/images/cards/card1.png"
-                alt="Body Fat Illustration"
-                className="mx-auto w-80"
-              />
-            </div>
-
-            <div className="space-y-4 text-[#13556F] font-inter text-base leading-relaxed">
-              <p>
-                Your body fat percentage tells us how much of your body is lean
-                mass (muscle, organs, bone) vs stored fat.
-                <br /> Too much stored fat doesn't just affect how you look — it
-                impacts your energy, hormone balance, and ability to burn fat
-                efficiently.
-              </p>
-              <p className="text-[#F75950] font-inter text-base">
-                {getConditionalText()}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3 mt-16">
-          <Button className="invisible" variant="outline">
-            Back
-            <ArrowLeft strokeWidth={3} className="size-6 absolute left-2" />
-          </Button>
-          <Button onClick={onNext}>
-            Next
-            <ArrowRight strokeWidth={3} className="size-6 absolute right-2" />
-          </Button>
-        </div>
+    <>
+      <div className="text-center mb-6">
+        <div className="flex justify-center mb-4 text-[34px]">⚖</div>
+        <h1 className="text-[#183B49] font-inter font-semibold text-[34px] leading-[1.2] mb-2">
+          Your Body Fat Percentage Is{" "}
+          <span className="text-[#F75950]">{formData.bodyFatPercent}%</span>
+        </h1>
+        <h2 className="text-[#183B49] font-inter font-semibold text-xl">
+          Here's Why That Matters
+        </h2>
       </div>
-    </div>
+
+      <div className="mb-6 flex justify-center">
+        <img
+          src="/images/cards/card1.png"
+          alt="Body Fat Illustration"
+          className="mx-auto w-80"
+        />
+      </div>
+
+      <div className="space-y-4 text-[#13556F] font-inter text-base leading-relaxed">
+        <p>
+          Your body fat percentage tells us how much of your body is lean mass
+          (muscle, organs, bone) vs stored fat.
+          <br /> Too much stored fat doesn't just affect how you look — it
+          impacts your energy, hormone balance, and ability to burn fat
+          efficiently.
+        </p>
+        <p className="text-[#F75950] font-inter text-base">
+          {getConditionalText()}
+        </p>
+      </div>
+    </>
   );
 };
