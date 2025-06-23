@@ -14,7 +14,6 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
   const [selectedPlan, setSelectedPlan] = useState<"installments" | "discount">(
     "discount"
   );
-
   // Animated progress values
   const [energyLevelsNow, setEnergyLevelsNow] = useState(0);
   const [physicalHealthNow, setPhysicalHealthNow] = useState(0);
@@ -23,6 +22,9 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
   const [physicalHealthFuture, setPhysicalHealthFuture] = useState(0);
   const [metabolismSpeedFuture, setMetabolismSpeedFuture] = useState(0);
 
+  // Page animation states
+  const [isVisible, setIsVisible] = useState(false);
+
   const planPickerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,6 +32,15 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    // Trigger initial page animation
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -71,35 +82,35 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
     };
 
     // Start animations with different delays
-    animateValue(setEnergyLevelsNow, targetValues.energyLevelsNow, 500, 1500);
+    animateValue(setEnergyLevelsNow, targetValues.energyLevelsNow, 800, 1500);
     animateValue(
       setPhysicalHealthNow,
       targetValues.physicalHealthNow,
-      800,
+      1100,
       1000
     );
     animateValue(
       setMetabolismSpeedNow,
       targetValues.metabolismSpeedNow,
-      1100,
+      1400,
       1250
     );
     animateValue(
       setEnergyLevelsFuture,
       targetValues.energyLevelsFuture,
-      750,
+      1050,
       2500
     );
     animateValue(
       setPhysicalHealthFuture,
       targetValues.physicalHealthFuture,
-      950,
+      1250,
       3000
     );
     animateValue(
       setMetabolismSpeedFuture,
       targetValues.metabolismSpeedFuture,
-      1200,
+      1500,
       3500
     );
   }, []);
@@ -149,10 +160,14 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             />
           </Button>
         </div>
-      )}
+      )}{" "}
       <div className="max-w-md mx-auto p-4 pb-20">
         {" "}
-        <div className="text-center mb-8">
+        <div
+          className={`text-center mb-8 transition-all duration-700 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="flex justify-center mb-5">
             <img
               src="/images/ketoslim-logo.png"
@@ -161,14 +176,32 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
             />
           </div>
         </div>
-        <div className="relative bg-white rounded-3xl p-6 shadow-lg transform transition-transform ">
-          <div className="text-center mb-6">
+        <div
+          className={`relative bg-white rounded-3xl p-6 shadow-lg transform transition-all duration-800 ease-out ${
+            isVisible
+              ? "opacity-100 translate-y-0 scale-100"
+              : "opacity-0 translate-y-8 scale-95"
+          }`}
+        >
+          <div
+            className={`text-center mb-6 transition-all duration-700 ease-out delay-200 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="flex justify-center mb-4 text-[34px]">🎯</div>
             <h1 className="text-[#1b3b48] font-semibold text-[34px] leading-[1.2] mb-2">
               Your Personalized KetoSlim Plan Is Ready
             </h1>
-          </div>
-          <div className="mb-6 flex justify-center relative">
+          </div>{" "}
+          <div
+            className={`mb-6 flex justify-center relative transition-all duration-800 ease-out delay-300 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
+          >
             <img
               src="/images/cards/card7.png"
               alt="Salespage Illustration"
@@ -179,7 +212,13 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               <p className="text-lg font-semibold text-[#1b3b48]">6 Months</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 relative gap-12 mt-20">
+          <div
+            className={`grid grid-cols-2 relative gap-12 mt-20 transition-all duration-900 ease-out delay-400 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }`}
+          >
             <div className="absolute h-full w-[1px] left-1/2 -bottom-7 -translate-x-1/2 bg-[#d8d8d8]" />
             <div className="flex flex-col">
               <p className="font-semibold text-[#1b3b48]">Body Fat</p>
@@ -239,8 +278,14 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
                 />
               </div>
             </div>
-          </div>
-          <h3 className="text-[#1b3b48] font-semibold text-xl mb-4 mt-14">
+          </div>{" "}
+          <h3
+            className={`text-[#1b3b48] font-semibold text-xl mb-4 mt-14 transition-all duration-700 ease-out delay-500 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
             Your program will also work on:
           </h3>
           <div className="space-y-3">
@@ -250,7 +295,15 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               "Mental Wellness Reset",
               "Physical Confidence Boost",
             ].map((benefit, index) => (
-              <div key={index} className="flex items-center gap-3">
+              <div
+                key={index}
+                className={`flex items-center gap-3 transition-all duration-600 ease-out ${
+                  isVisible
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 -translate-x-4"
+                }`}
+                style={{ transitionDelay: `${600 + index * 100}ms` }}
+              >
                 <div className="w-6 h-6 border-2 border-[#f35654] rounded-full flex items-center justify-center">
                   <span className="text-[#f35654] ">
                     <Check size={16} strokeWidth={3} />
@@ -259,11 +312,23 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
                 <span className="text-[#1b556e]">{benefit}</span>
               </div>
             ))}
-          </div>
-          <h3 className="text-[#1b3b48] font-semibold text-xl mb-4 mt-14">
+          </div>{" "}
+          <h3
+            className={`text-[#1b3b48] font-semibold text-xl mb-4 mt-14 transition-all duration-700 ease-out delay-700 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
             Get all the right tools & knowledge.
           </h3>
-          <div className="grid grid-cols-2">
+          <div
+            className={`grid grid-cols-2 transition-all duration-800 ease-out delay-800 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
+          >
             <div>
               {[
                 {
@@ -304,11 +369,23 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
                 className="h-full object-cover scale-125 translate-x-4"
               />
             </div>
-          </div>
-          <h2 className="text-[#1b3b48] font-bold text-3xl leading-tight mb-4 mt-14">
+          </div>{" "}
+          <h2
+            className={`text-[#1b3b48] font-bold text-3xl leading-tight mb-4 mt-14 transition-all duration-700 ease-out delay-900 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+          >
             Trusted by health & nutrition professionals
           </h2>
-          <div className="flex flex-col gap-2">
+          <div
+            className={`flex flex-col gap-2 transition-all duration-800 ease-out delay-1000 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
+          >
             <img
               src="/images/assets/pubmed-logo-b.svg"
               className="h-7 w-auto mt-6 mb-2"
@@ -333,7 +410,14 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               source
             </a>
           </div>{" "}
-          <div ref={planPickerRef} className="flex flex-col gap-4 mt-8">
+          <div
+            ref={planPickerRef}
+            className={`flex flex-col gap-4 mt-8 transition-all duration-800 ease-out delay-1100 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }`}
+          >
             <p className="text-center text-[#1b3b48]">
               3 Month Custom Keto Plan
             </p>
@@ -344,9 +428,9 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
               </p>
             </div>{" "}
             <div
-              className={`rounded-lg border-3 px-4 py-1.5 text-[#1b3b48] relative cursor-pointer transition-all ${
+              className={`rounded-lg border-3 px-4 py-1.5 text-[#1b3b48] relative cursor-pointer transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 ${
                 selectedPlan === "installments"
-                  ? "border-[#84dbc2]"
+                  ? "border-[#84dbc2] shadow-md"
                   : "border-[#bebebe] hover:border-[#a0a0a0]"
               }`}
               onClick={() => setSelectedPlan("installments")}
@@ -366,11 +450,11 @@ export const SalespageCard: React.FC<SalespageCardProps> = ({ formData }) => {
                   <Check className="text-white" size={16} strokeWidth={4} />
                 )}
               </div>
-            </div>
+            </div>{" "}
             <div
-              className={`rounded-lg border-3 px-4 py-1.5 text-[#1b3b48] relative cursor-pointer transition-all pb-9 ${
+              className={`rounded-lg border-3 px-4 py-1.5 text-[#1b3b48] relative cursor-pointer transition-all duration-300 ease-out pb-9 hover:shadow-lg hover:-translate-y-1 ${
                 selectedPlan === "discount"
-                  ? "border-[#84dbc2]"
+                  ? "border-[#84dbc2] shadow-md"
                   : "border-[#bebebe] hover:border-[#a0a0a0]"
               }`}
               onClick={() => setSelectedPlan("discount")}
